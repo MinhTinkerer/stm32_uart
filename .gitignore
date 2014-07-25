@@ -3,3 +3,4 @@
 *.bin
 *.elf
 stm32_uart/Debug/
+*.pbxproj

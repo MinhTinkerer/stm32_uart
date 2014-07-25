@@ -20,8 +20,7 @@ void UART_Init(void)
 	GPIO_InitTypeDef gpioStruct;
 	USART_InitTypeDef usartStruct;
 
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA ,ENABLE);
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2 ,ENABLE);
+	USART_RCC_INIT;
 
 	gpioStruct.GPIO_Pin = USART_Pin_Tx;
 	gpioStruct.GPIO_Mode = GPIO_Mode_AF_PP;
@@ -35,7 +34,7 @@ void UART_Init(void)
 	GPIO_Init(USART_GPIO,&gpioStruct);
 
 	//USART_Settings
-	usartStruct.USART_BaudRate = USART_BOUD_RATE;
+	usartStruct.USART_BaudRate = UART_BOUD_RATE;
 	usartStruct.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
 	usartStruct.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 	usartStruct.USART_Parity = USART_Parity_No;
@@ -45,7 +44,7 @@ void UART_Init(void)
 
 	USART_ITConfig(USARTx, USART_IT_RXNE, ENABLE);
 	USART_Cmd(USARTx, ENABLE);
-	NVIC_EnableIRQ(USART2_IRQn);
+	NVIC_EnableIRQ(USARTx_IRQn);
 
 #ifdef USE_FREERTOS
 	xRxSemaphore = xSemaphoreCreateCounting(10,0);
@@ -82,7 +81,7 @@ int UART_GetChar()
 		return (int)data;
 	}
 	else	{
-		return (NO_DATA);
+		return (UART_NO_DATA);
 	}
 }
 
@@ -94,7 +93,7 @@ int UART_GetCharBlocking()
 }
 #endif
 
-void USART2_IRQHandler (void)
+void USARTx_IRQHandler (void)
 {
 	if (USART_GetITStatus(USARTx,USART_IT_RXNE) != RESET)	{
 		USART_ClearITPendingBit(USARTx, USART_IT_RXNE);

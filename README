@@ -5,5 +5,5 @@ This code is non-blocking, because of using RX and TX interrupts, circullar buff
 Also can be used semaphore to block task while waiting incomming data.
 
 TODO:
- * convenient selection of the desired USART hardware module.
  * some speed optimization
+ * buffer overflow protection and error handling
