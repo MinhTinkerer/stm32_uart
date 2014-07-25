@@ -1,0 +1,5 @@
+*.o
+*.hex
+*.bin
+*.elf
+stm32_uart/Debug/
