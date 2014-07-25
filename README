@@ -1,2 +1,9 @@
 stm32_uart
 ==========
+Module UART for STM32F10x. Can be used with FreeRTOS (uncomment USE_FREERTOS define).
+This code is non-blocking, because of using RX and TX interrupts, circullar buffers and staff.
+Also can be used semaphore to block task while waiting incomming data.
+
+TODO:
+ * convenient selection of the desired USART hardware module.
+ * some speed optimization
