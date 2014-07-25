@@ -4,13 +4,13 @@
 int main(void)
 {
 	UART_Init();
-	UART_SendString("hello with new library");
+	UART_SendString("Hello with UART library\n");
     while(1)
     {
     	int result;
 
     	result = UART_GetChar();
-    	if (result != NO_DATA)	{
+    	if (result != UART_NO_DATA)	{
     		UART_SendChar( ((uint8_t)result) + 1);
     	}
     }
