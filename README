@@ -7,3 +7,4 @@ Also can be used semaphore to block task while waiting incomming data.
 TODO:
  * some speed optimization
  * buffer overflow protection and error handling
+ * mutex for sending data to UART
