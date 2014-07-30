@@ -110,7 +110,6 @@ void USARTx_IRQHandler (void)
 #endif
 	}
 	else if (USART_GetITStatus(USARTx,USART_IT_TXE) != RESET)	{
-		USART_ClearITPendingBit(USARTx, USART_IT_TXE);
 		if (sTxRingBuf.wrIdx != sTxRingBuf.rdIdx)	{
 			USART_SendData(USARTx, sTxRingBuf.data[sTxRingBuf.rdIdx++]);
 			if (sTxRingBuf.rdIdx >= uartSIZE_OF_RING_BUFFER)	{
